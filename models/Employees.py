@@ -6,9 +6,17 @@ class EmployeesModel(db.Model):
     """nullability by default is true"""
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     fullName = db.Column(db.String(60), nullable=False)
+    gender = db.Column(db.String(10),nullable=False)
     kraPin = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(30), unique=True, nullable=False)
     nationalId = db.Column(db.String(50), unique=True, nullable=False)
     departmentId = db.Column(db.Integer, db.ForeignKey('departments.id'))
     basicSalary = db.Column(db.Float)
     benefits = db.Column(db.Float)
+
+    # create
+    """This is an instance method"""
+
+    def insert_to_db(self):
+        db.session.add(self)
+        db.session.commit()
