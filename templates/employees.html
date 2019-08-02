@@ -30,13 +30,13 @@
   </head>
   <body>
   <!-- Button trigger modal for Department -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
-  Add New Department
-</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
+        Add New Department
+    </button>
   <!-- Button trigger modal for Employee -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
-  Add New Employee
-</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
+        Add New Employee
+    </button>
   <!-- Modal for Department -->
 <div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -75,9 +75,9 @@
       </div>
       <div class="modal-body">
 
-           <form action="/newEmployee" method="post">
+           <form action="/newEmployee" method="POST">
                 <div class="form-group">
-                     <label for="formGroupExampleInput">Name of Employee</label>
+                     <label for="formGroupExampleInput">Employee Name</label>
                      <input name="name" required type="text" class="form-control" id="formGroupExampleInput" placeholder="employee_name">
                  </div>
                <div class="form-group">
@@ -110,7 +110,7 @@
                  </div>
                <div class="form-group">
                      <label for="formGroupExampleInput">Benefits</label>
-                     <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="Benefits">
+                     <input required type="number" class="form-control" id="formGroupExampleInput" placeholder="Benefits">
                  </div>
                <div class="form-group">
                 <input  type="Submit" class="form-control btn-primary">
@@ -120,6 +120,8 @@
     </div>
   </div>
 </div>
+
+
  <table class="table">
   <thead>
     <tr>
