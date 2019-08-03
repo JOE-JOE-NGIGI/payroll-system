@@ -1,5 +1,5 @@
 """Importing sqlAlchemy object from main file --> app"""
-from app import db
+from main import db
 from models.Employees import EmployeesModel
 
 
