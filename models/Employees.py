@@ -6,7 +6,7 @@ class EmployeesModel(db.Model):
     """nullability by default is true"""
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     fullName = db.Column(db.String(60), nullable=False)
-    gender = db.Column(db.String(10),nullable=False)
+    gender = db.Column(db.String(30), nullable=False)
     kraPin = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(30), unique=True, nullable=False)
     nationalId = db.Column(db.String(50), unique=True, nullable=False)
@@ -20,3 +20,7 @@ class EmployeesModel(db.Model):
     def insert_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def fetch_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()

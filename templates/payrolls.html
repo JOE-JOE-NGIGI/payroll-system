@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+  <!-- Button trigger modal for Employee -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generatePayroll">
+        Generate Payroll
+    </button>
+  <!-- Modal for Department -->
+<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/newDepartment" method="post">
+  <div class="form-group">
+    <label for="formGroupExampleInput">Name of Department</label>
+    <input name="department" required type="text" class="form-control" id="formGroupExampleInput" placeholder="department">
+  </div>
+            <div class="form-group">
+                <input  type="Submit" class="form-control btn-primary">
+            </div>
+
+</form>
+      </div>
+</div>
+
+  <!-- Modal for Payroll -->
+<div class="modal fade" id="generatePayroll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Generate Payroll</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+           <form action="/generate_payroll/{{ employee.id }}" method="POST">
+                <div class="form-group">
+                     <label for="formGroupExampleInput">Month</label>
+                     <input name="Month"  required type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g JAN2019">
+                 </div>
+                <div class="form-group">
+                     <label for="formGroupExampleInput">Overtime?</label>
+                     <input name="overtime" value="0" required type="number" class="form-control" id="formGroupExampleInput" placeholder="overtime">
+                 </div>
+                 <div class="form-group">
+                     <label for="formGroupExampleInput">Any Loan Deduction?</label>
+                     <input name="loan" value="0" required type="number" class="form-control" id="formGroupExampleInput" placeholder="loan deduction">
+                 </div>
+                 <div class="form-group">
+                     <label for="formGroupExampleInput">Salary advance</label>
+                     <input name="advance" required type="number" value="0" class="form-control" id="formGroupExampleInput" placeholder="advance">
+                 </div>
+
+               <div class="form-group">
+                <input  type="Submit" class="form-control btn-primary">
+            </div>
+           </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name of Department</th>
+        <th scope="col">Employees</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for each in deps  %}
+    <tr>
+      <th scope="row">{{ each.id }}</th>
+      <td>{{ each.name }}</td>
+        <td><a href="/employees/{{ each.id }}">View Employees</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Kra Pin</th>
+        <th scope="col">email</th>
+        <th scope="col">National Id</th>
+        <th scope="col">Basic Salary</th>
+        <th scope="col">Benefits</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for each in employees  %}
+    <tr>
+      <th scope="row">{{ each.id }}</th>
+      <td>{{ each.fullName }}</td>
+      <td>{{ each.gender }}</td>
+      <td>{{ each.kra_pin }}</td>
+      <td>{{ each.email }}</td>
+      <td>{{ each.national_id }}</td>
+      <td>{{ each.basic_salary }}</td>
+      <td>{{ each.basic_benefits }}</td>
+        <td><a href="/payrolls/{{ each.id }}">View Payrolls</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
