@@ -52,7 +52,7 @@ def home():  # Function to run when clients visit this route
 def generate_payroll(id):
     """instantiating the class"""
     this_employee = EmployeesModel.fetch_by_id(id)
-    payroll = Employee(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
+    payroll = Payroll(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
     # nhif = payroll.nhif
     print("nssf ", payroll.nssf_deduct)
     print("paye ", payroll.paye)

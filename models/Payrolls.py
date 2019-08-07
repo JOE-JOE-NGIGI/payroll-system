@@ -13,9 +13,14 @@ class PayrollsModel(db.Model):
     NHIF = db.Column(db.Float)
     NSSF = db.Column(db.Float)
     net_salary = db.Column(db.Float)
-    employee_id = db.Column(db.Integer, db.Foreignkey('employees.id'))
+    """Defining foreign key for Table:Departments"""
+    employee_id = db.Column(db.Integer, db.Foreignkey('employees.id'), nullable=False)
 
 
     def insert_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def fetch_by_employee(cls, emp_id):
+        return cls.query.filter_by(employee_id=emp_id)
