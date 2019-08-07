@@ -37,7 +37,8 @@ def employees(dept_id):
 
     """returns employees within the  department"""
     employees = this_department.employees
-    return render_template('employees.html', this_department=this_department)
+    departments = DepartmentModel.fetch_all()
+    return render_template('employees.html', this_department=this_department, deps=departments)
 
 @app.route('/payrolls/<int:emp_id>')
 def payrolls(emp_id):
@@ -50,19 +51,60 @@ def home():  # Function to run when clients visit this route
     departments = DepartmentModel.fetch_all()
     return render_template('index.html', deps=departments)
 
+"""Register route for edit employee"""
+@app.route('/editEmployee/<int:id>', methods=['POST'])
+def editEmployee(id):
+    name_of_employee = request.form['name']
+    kra_pin = request.form['kra_pin']
+    gender = request.form['gender']
+    national_id = request.form['national_id']
+    email = request.form['email']
+    department_id = int(request.form['department'])
+    basic_salary = request.form['basic_salary']
+    benefits = request.form['benefits']
+
+
+    if gender == "N/A":
+        gender = None
+
+    if department_id == "0":
+        department_id = None
+
+    EmployeesModel.update_by_id(id=id, fullName=name_of_employee, gender=gender, kraPin=kra_pin, email=email, nationalId=national_id, departmentId=department_id, basicSalary=basic_salary, benefits=benefits)
+
+    """fetch employee"""
+    this_emp = EmployeesModel.fetch_by_id(id=id)
+    """fetch employee's department"""
+    this_dept = this_emp.department
+    return redirect(url_for('employees', dept_id=this_dept.id))
+
+    """call function"""
+@app.route('/deleteEmployee/<int:id>')
+def deleteEmployee(id) :
+    """Function to delete employee"""
+    this_emp = EmployeesModel.fetch_by_id(id=id)
+    this_dept = this_emp.department
+    EmployeesModel.delete_by_id(id)
+    return redirect(url_for('employees', dept_id=this_dept.id))
+
+
+
 
 @app.route('/generate_payroll/<int:id>', methods=['POST'])
 def generate_payroll(id):
     """instantiating the class"""
     this_employee = EmployeesModel.fetch_by_id(id)
     payroll = Payrollcalc(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
-    # nhif = payroll.nhif
-    print("nssf ", payroll.nssf_deduct)
-    print("paye ", payroll.paye)
-    print("net Salary ", payroll.netSalary)
-    print("Gross Salary ", payroll.grossSalary)
-    print("Personal relief ", payroll.relief)
-    print("Taxable Income ", payroll.taxable_income)
+    nhif = payroll.NHIF_deduct
+    nssf = payroll.nssf_deduct
+    paye = payroll.paye
+    net_Salary = payroll.netSalary
+    Gross_Salary = payroll.grossSalary
+    Personal_relief = payroll.relief
+    Taxable_Income = payroll.taxable_income
+
+    return render_template('payrolls.html', this_employee=EmployeesModel)
+
 
 @app.route('/name')
 def name():
