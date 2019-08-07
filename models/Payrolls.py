@@ -1,8 +1,10 @@
-from app import db
+from main import db
+from models.Employees import EmployeesModel
+
 
 class PayrollsModel(db.Model):
-    tablename = 'payrolls'
-    id = db.Column(db.Integer, primary=True)
+    __tablename__ = 'payrolls'
+    id = db.Column(db.Integer, primary_key=True)
     overtime = db.Column(db.Float)
     month = db.Column(db.String(20), nullable=False)
     advance_pay = db.Column(db.Float)
@@ -14,7 +16,7 @@ class PayrollsModel(db.Model):
     NSSF = db.Column(db.Float)
     net_salary = db.Column(db.Float)
     """Defining foreign key for Table:Departments"""
-    employee_id = db.Column(db.Integer, db.Foreignkey('employees.id'), nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
 
 
     def insert_to_db(self):

@@ -16,6 +16,8 @@ db = SQLAlchemy(app)  #read this from documentation
 
 from models.Employees import EmployeesModel
 from models.Departments import DepartmentModel
+from models.Payrolls import PayrollsModel
+
 
 # TODO: read about flask-migrate
 @app.before_first_request
@@ -42,6 +44,7 @@ def payrolls(emp_id):
     employee = EmployeesModel.fetch_by_id(emp_id)
     return render_template('payrolls.html', employee=employee)
 
+"""Registering a route"""
 @app.route('/')
 def home():  # Function to run when clients visit this route
     departments = DepartmentModel.fetch_all()
@@ -52,7 +55,7 @@ def home():  # Function to run when clients visit this route
 def generate_payroll(id):
     """instantiating the class"""
     this_employee = EmployeesModel.fetch_by_id(id)
-    payroll = Payroll(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
+    payroll = Payrollcalc(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
     # nhif = payroll.nhif
     print("nssf ", payroll.nssf_deduct)
     print("paye ", payroll.paye)
