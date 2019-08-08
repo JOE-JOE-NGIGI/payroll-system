@@ -108,5 +108,5 @@ class Payrollcalc:
 
 
     def get_netsalary_calc(self):
-        self.netSalary = self.gross_tax - self.NHIF_deduct
+        self.netSalary = self.grossSalary - self.paye - self.NHIF_deduct
 

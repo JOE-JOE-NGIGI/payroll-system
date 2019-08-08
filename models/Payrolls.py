@@ -2,6 +2,7 @@ from main import db
 from models.Employees import EmployeesModel
 
 
+
 class PayrollsModel(db.Model):
     __tablename__ = 'payrolls'
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +19,7 @@ class PayrollsModel(db.Model):
     """Defining foreign key for Table:Departments"""
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
 
-
+    # Create
     def insert_to_db(self):
         db.session.add(self)
         db.session.commit()

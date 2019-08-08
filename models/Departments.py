@@ -35,3 +35,11 @@ class DepartmentModel(db.Model):
 
 
 
+    @classmethod
+    def fetch_total_payroll_by_id(cls,id):
+        this_dept = cls.fetch_by_id(dept_id=id)
+        total_payroll = 0
+        for each_employee in this_dept.employees:
+            total_payroll += each_employee.basicSalary + each_employee.benefits
+
+            return total_payroll

@@ -11,10 +11,6 @@
 
 
 <body>
-  <!-- Button trigger modal for Department -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
-        Add New Department
-    </button>
   <!-- Button trigger modal for Employee -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
         Add Employee to {{ this_department.name }}
@@ -98,7 +94,7 @@
         <th scope="col">Benefits</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
-        <th scope="col"></th>
+        <th scope="col">Payrolls</th>
     </tr>
 
   </thead>
@@ -182,6 +178,7 @@
 </div>
 </td>
     <td><a href="/deleteEmployee/{{ each.id }}"><button class="btn btn-danger">Delete</button> </a></td>
+    <td><a href="/payrolls/{{ each.id }}">View Payrolls</button> </a></td>
 
     </tr>
 

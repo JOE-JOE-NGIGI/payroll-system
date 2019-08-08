@@ -4,10 +4,10 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body>
@@ -29,27 +29,31 @@
       </div>
       <div class="modal-body">
 
-           <form action="/generate_payroll/{{ employee.id }}" method="POST">
+           <form action="/generate_payroll/{{ employee.id }}" method="post">
                 <div class="form-group">
                      <label for="formGroupExampleInput">Month</label>
-                     <input name="Month"  required type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g JAN2019">
+                     <input name="Month"  required type="text" class="form-control"
+                            id="formGroupExampleInput" placeholder="e.g JAN2019">
                  </div>
                 <div class="form-group">
                      <label for="formGroupExampleInput">Overtime?</label>
-                     <input name="overtime" value="0" required type="number" class="form-control" id="formGroupExampleInput" placeholder="overtime">
+                     <input name="overtime" value="0" required type="number" class="form-control"
+                            id="formGroupExampleInput" placeholder="overtime">
                  </div>
                  <div class="form-group">
                      <label for="formGroupExampleInput">Any Loan Deduction?</label>
-                     <input name="loan" value="0" required type="number" class="form-control" id="formGroupExampleInput" placeholder="loan deduction">
+                     <input name="loan" value="0" required type="number" class="form-control"
+                            id="formGroupExampleInput" placeholder="loan deduction">
                  </div>
                  <div class="form-group">
                      <label for="formGroupExampleInput">Salary advance</label>
-                     <input name="advance" required type="number" value="0" class="form-control" id="formGroupExampleInput" placeholder="advance">
+                     <input name="advance" required type="number" value="0" class="form-control"
+                            id="formGroupExampleInput" placeholder="advance">
                  </div>
 
-               <div class="form-group">
+
                 <input  type="Submit" class="form-control btn-primary">
-            </div>
+
            </form>
       </div>
     </div>
@@ -57,12 +61,21 @@
 </div>
 
 
+
+
+
  <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name of Department</th>
-        <th scope="col">Employees</th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Kra PIN</th>
+            <th scope="col">Email</th>
+            <th scope="col">National ID</th>
+            <th scope="col">Basic Salary</th>
+            <th scope="col">Benefits</th>
+            <th scope="col">Payrolls</th>
     </tr>
   </thead>
   <tbody>
@@ -71,46 +84,19 @@
     <tr>
       <th scope="row">{{ each.id }}</th>
       <td>{{ each.name }}</td>
-        <td><a href="/employees/{{ each.id }}">View Employees</a></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Kra Pin</th>
-        <th scope="col">email</th>
-        <th scope="col">National Id</th>
-        <th scope="col">Basic Salary</th>
-        <th scope="col">Benefits</th>
-
-
-    </tr>
-  </thead>
-  <tbody>
-
-  {% for each in employees  %}
-    <tr>
-      <th scope="row">{{ each.id }}</th>
-      <td>{{ each.fullName }}</td>
       <td>{{ each.gender }}</td>
-      <td>{{ each.kra_pin }}</td>
+      <td>{{ each.kraPin }}</td>
       <td>{{ each.email }}</td>
-      <td>{{ each.national_id }}</td>
-      <td>{{ each.basic_salary }}</td>
-      <td>{{ each.basic_benefits }}</td>
+      <td>{{ each.nationalId }}</td>
+      <td>{{ each.basicSalary }}</td>
+      <td>{{ each.benefits }}</td>
+      <td>{{ each.benefits }}</td>
         <td><a href="/payrolls/{{ each.id }}">View Payrolls</a></td>
     </tr>
   {% endfor %}
+
   </tbody>
 </table>
-  </div>
-</div>
 
 
     <!-- Optional JavaScript -->
