@@ -9,8 +9,8 @@ from resources.Payrollcalc import Payrollcalc
 app = Flask(__name__)
 
 # this is a config parameter that shows where our db lives
-#app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+# app.config.from_object(Production)
 
 db = SQLAlchemy(app)  #read this from documentation
 
