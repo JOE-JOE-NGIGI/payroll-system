@@ -11,8 +11,8 @@ import pygal
 app = Flask(__name__)
 
 # this is a config parameter that shows where our db lives
-#app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+#app.config.from_object(Production)
 
 db = SQLAlchemy(app)  #read this from documentation
 
@@ -128,6 +128,13 @@ def generate_payroll(id):
     """instantiating the class"""
     this_employee = EmployeesModel.fetch_by_id(id)
     payroll = Payrollcalc(this_employee.fullName, this_employee.basicSalary, this_employee.benefits)
+
+    overtime = request.form['overtime']
+
+    # name = payroll.name
+    month = request.form['Month']
+    loan = request.form['loan']
+    salary_advance = request.form['advance']
     nhif = payroll.NHIF_deduct
     nssf = payroll.nssf_deduct
     paye = payroll.paye
@@ -136,7 +143,14 @@ def generate_payroll(id):
     Personal_relief = payroll.relief
     Taxable_Income = payroll.taxable_income
 
-    return render_template('payrolls.html', this_employee=EmployeesModel)
+    payslip = PayrollsModel(month=month, overtime=overtime, gross_salary=Gross_Salary, NSSF=nssf,
+                           taxable_income=Taxable_Income, PAYE=paye, personal_relief=Personal_relief,
+                           NHIF=nhif, net_salary=net_Salary, employee_id=this_employee.id)
+    payslip.insert_to_db()
+    flash('Payslip for ' + this_employee.fullName + ' has been successfully generated', 'success')
+    #return redirect(url_for('generate_payroll', employee=this_employee))
+
+    return render_template('payrolls.html', employee=this_employee)
 
 
 @app.route('/name')
