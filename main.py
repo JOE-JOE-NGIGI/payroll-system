@@ -49,7 +49,9 @@ def payrolls(emp_id):
     return render_template('payrolls.html', employee=employee)
 
 """Registering a route"""
-@app.route('/')
+
+
+@app.route('/', methods=['GET'])
 def home():  # Function to run when clients visit this route
     departments = DepartmentModel.fetch_all()
     all_employees = EmployeesModel.fetch_all()
@@ -64,7 +66,6 @@ def home():  # Function to run when clients visit this route
             female += 1
         else:
             others += 1
-
 
     pie_chart = pygal.Pie() #instantiating the pie class
     pie_chart.title = 'Comparing Company Employees by Gender)'
