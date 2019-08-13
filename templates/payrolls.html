@@ -11,6 +11,12 @@
     <title>HR PAYROLL SYSTEM</title>
 </head>
 
+<style>
+    body {
+        background-color: cadetblue;
+    }
+</style>
+
 <body>
 
 <!-- Button trigger modal for Employee -->
@@ -90,7 +96,7 @@
             <td>{{ each.basicSalary }}</td>
             <td>{{ each.benefits }}</td>
             <td>{{ each.benefits }}</td>
-            <td><a href="/payrolls/{{ each.id }}">View Payrolls</a></td>
+            <td><a style="color: floralwhite" href="/payrolls/{{ each.id }} ">View Payrolls</a></td>
         </tr>
     {% endfor %}
 

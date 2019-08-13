@@ -11,8 +11,8 @@ import pygal
 app = Flask(__name__)
 
 # this is a config parameter that shows where our db lives
-# app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+# app.config.from_object(Production)
 
 db = SQLAlchemy(app)  #read this from documentation
 
@@ -114,7 +114,7 @@ def editEmployee(id):
 
     """call function"""
 @app.route('/deleteEmployee/<int:id>')
-def deleteEmployee(id) :
+def deleteEmployee(id):
     """Function to delete employee"""
     this_emp = EmployeesModel.fetch_by_id(id=id)
     this_dept = this_emp.department
